@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro" name="agrobot_arm" >
+	
+<xacro:property name="width" value=".2" />
+
+
+  <link name="agrobot_link0">
+    <visual>
+      <geometry>
+       <mesh filename="package://agrobot_arm_description/urdf/base.dae"/>
+      </geometry>
+    <origin xyz = "0.0 0 0 " rpy = " 0 0 1.5708"/>
+    </visual>
+    <collision>
+      <geometry>
+       <mesh filename="package://agrobot_arm_description/urdf/base.dae"/>
+        </geometry>
+        <origin xyz = "0.0 0 0 " rpy = " 0 0 1.5708"/>
+    </collision>
+  </link>
+
+  <link name="agrobot_link1">
+    <visual>
+      <geometry>
+       <mesh filename="package://agrobot_arm_description/urdf/link1.dae"/>
+      </geometry>
+
+    <origin xyz = "0.0 0.0 -0.078 " rpy = " 0 0 1.5708"/>
+    </visual>
+    <collision>
+     <geometry>
+       <mesh filename="package://agrobot_arm_description/urdf/link1.dae"/>
+      </geometry>
+     <origin xyz = "0.0 0.0 -0.078 " rpy = " 0 0 1.5708"/>
+    </collision>
+  </link>
+
+
+  <link name="agrobot_link2">
+    <visual>
+      <geometry>
+       
+       <mesh filename="package://agrobot_arm_description/urdf/link2.dae"/>
+      </geometry>
+       <origin xyz = "0.0 0.0 -0.04 " rpy = " 0 1.5708 0"/>
+    </visual>
+    <collision>
+      <geometry>
+       <mesh filename="package://agrobot_arm_description/urdf/link2.dae"/>
+      </geometry>
+       <origin xyz = "0.0 0.0 -0.04 " rpy = " 0 1.5708 0"/>
+    </collision>
+  </link>
+
+
+  <link name="agrobot_link3">
+    <visual>
+      <geometry>
+       <mesh filename="package://agrobot_arm_description/urdf/link3.dae"/>
+      </geometry>
+    <origin xyz = "0.0 0.0 0.039 " rpy = " 1.5708 1.5708 1.5708"/>
+    </visual>
+    <collision>
+      <geometry>
+       <mesh filename="package://agrobot_arm_description/urdf/link3.dae"/>
+      </geometry>
+      <origin xyz = "0.0 0.0 0.039 " rpy = " 1.5708 1.5708 1.5708"/>
+    </collision>
+  </link>
+
+
+  <link name="agrobot_link4">
+    <visual>
+      <geometry>
+       <mesh filename="package://agrobot_arm_description/urdf/link4.dae"/>
+      </geometry>
+         <origin xyz = "0.0 -0.0024 -0.05" rpy = " 1.5708 1.5708 0"/>
+    </visual>
+    <collision>
+       <geometry>
+       <mesh filename="package://agrobot_arm_description/urdf/link4.dae"/>
+      </geometry>
+       <origin xyz = "0.0 -0.0024 -0.05" rpy = " 1.5708 1.5708 0"/>
+    </collision>
+  </link>
+
+
+  <link name="agrobot_link5">
+    <visual>
+      <geometry>
+       <mesh filename="package://agrobot_arm_description/urdf/link5.dae"/>
+      </geometry>
+    <origin xyz = "0.0 0.0 -0.05 " rpy = " 0  0 -1.5708"/>
+    </visual>
+    <collision>
+      <geometry>
+       <mesh filename="package://agrobot_arm_description/urdf/link5.dae"/>
+      </geometry>
+    <origin xyz = "0.0 0.0 -0.05 " rpy = " 0  0 -1.5708"/>
+    </collision>
+  </link>
+
+
+  <link name="agrobot_link6">
+    <visual>
+      <geometry>
+       <mesh filename="package://agrobot_arm_description/urdf/link6.dae"/>
+      </geometry>
+     <origin xyz = "0.0 0.0 -0.0115 " rpy = " 1.5708 1.5708 0"/>
+    </visual>
+    <collision>
+      <geometry>
+       <mesh filename="package://agrobot_arm_description/urdf/link6.dae"/>
+      </geometry>
+    <origin xyz = "0.0 0.0 -0.0115 " rpy = " 1.5708 1.5708 0"/>
+    </collision>
+  </link>
+
+
+  <joint name="agrobot_joint1" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort = "1000.0" lower = "-2.87" upper = "2.87" velocity = "0"/>
+    <parent link="agrobot_link0"/>
+    <child link="agrobot_link1"/>
+    <origin xyz= "0 0 0.173" rpy = "0 0 0"/> 
+  </joint>
+
+
+  <joint name="agrobot_joint2" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort = "1000.0" lower = "-2.879" upper = "2.879" velocity = "0"/>
+    <parent link="agrobot_link1"/>
+    <child link="agrobot_link2"/>
+       <origin xyz= "0 -0.086 0" rpy = "0 -1.5708 1.5708"/> 
+  </joint>
+
+
+  <joint name="agrobot_joint3" type="revolute">
+    <axis xyz=" 0 0 1"/>
+    <limit effort = "1000.0" lower = "-2.879" upper = "2.879" velocity = "0"/>
+    <parent link="agrobot_link2"/>
+    <child link="agrobot_link3"/>
+    <origin xyz= "0.13635 0 -0.086   " rpy = "0 0 0"/>  
+  </joint>
+
+  <joint name="agrobot_joint4" type="revolute">
+    <axis xyz=" 0 0 1"/>
+    <limit effort = "1000.0" lower = "-2.879" upper = "2.879" velocity = "0"/>
+    <parent link="agrobot_link3"/>
+    <child link="agrobot_link4"/>
+     <origin xyz = "0.1195 0 0.082 " rpy = " 0 0 1.57080"/>
+  </joint>
+
+  <joint name="agrobot_joint5" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort = "1000.0" lower = "-2.879" upper = "2.879" velocity = "0"/>
+    <parent link="agrobot_link4"/>
+    <child link="agrobot_link5"/>
+     <origin xyz= "0 -0.09415 0.0" rpy = "1.5708 0 0"/>
+  </joint>
+
+  <joint name="agrobot_joint6" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort = "1000.0" lower = "-3.05" upper = "3.05" velocity = "0"/>
+    <parent link="agrobot_link5"/>
+    <child link="agrobot_link6"/>
+     <origin xyz= "0 0.055 0.0" rpy = "-1.5708 0 0"/>
+  </joint>
+
+
+</robot>

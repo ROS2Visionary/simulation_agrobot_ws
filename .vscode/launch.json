@@ -1,0 +1,47 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "(gdb) Launch",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/install/${input:package_name}/lib/${input:package_name}/${input:package_executable}",
+        "args": [],
+        "stopAtEntry": true,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "setupCommands": [
+            {
+                "description": "Enable pretty-printing for gdb",
+                "text": "-enable-pretty-printing",
+                "ignoreFailures": true
+            },
+            // {
+            //     "description": "Set Disassembly Flavor to Intel",
+            //     "text": "-gdb-set disassembly-flavor intel",
+            //     "ignoreFailures": true
+            // }
+        ]
+      }
+    ],
+    "inputs": [
+      {
+        "id": "package_name",
+        "type": "promptString",
+        "description": "ros2 package name",
+        "default": "agrobot_arm_controller"
+      },
+      {
+        "id": "package_executable",
+        "type": "promptString",
+        "description": "ros2 package executable",
+        "default": "demo"
+      }
+    ]
+  }
+  

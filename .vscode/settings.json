@@ -1,0 +1,26 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/ros2_projects/robot_ws/install/panda_moveit_config/lib/python3.10/site-packages",
+        "/ros2_projects/robot_ws/install/agrobot_navigation/lib/python3.10/site-packages",
+        "/ros2_projects/robot_ws/install/agrobot_mapping/lib/python3.10/site-packages",
+        "/ros2_projects/robot_ws/install/agrobot_localization/lib/python3.10/site-packages",
+        "/ros2_projects/robot_ws/install/agrobot_firmware/lib/python3.10/site-packages",
+        "/ros2_projects/robot_ws/install/agrobot_description/lib/python3.10/site-packages",
+        "/ros2_projects/robot_ws/install/agrobot_controller/lib/python3.10/site-packages",
+        "/ros2_projects/robot_ws/install/agrobot_arm_description/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/ros2_projects/robot_ws/install/panda_moveit_config/lib/python3.10/site-packages",
+        "/ros2_projects/robot_ws/install/agrobot_navigation/lib/python3.10/site-packages",
+        "/ros2_projects/robot_ws/install/agrobot_mapping/lib/python3.10/site-packages",
+        "/ros2_projects/robot_ws/install/agrobot_localization/lib/python3.10/site-packages",
+        "/ros2_projects/robot_ws/install/agrobot_firmware/lib/python3.10/site-packages",
+        "/ros2_projects/robot_ws/install/agrobot_description/lib/python3.10/site-packages",
+        "/ros2_projects/robot_ws/install/agrobot_controller/lib/python3.10/site-packages",
+        "/ros2_projects/robot_ws/install/agrobot_arm_description/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}

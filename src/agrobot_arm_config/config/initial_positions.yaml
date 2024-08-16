@@ -1,0 +1,9 @@
+# Default initial positions for agrobot_arm's ros2_control fake system
+
+initial_positions:
+  agrobot_joint1: 0
+  agrobot_joint2: 0
+  agrobot_joint3: 0
+  agrobot_joint4: 0
+  agrobot_joint5: 0
+  agrobot_joint6: 0

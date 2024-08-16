@@ -1,0 +1,44 @@
+map_start_pose : [-0.2771758735179901,4.2819342613220215,-1.5611132853006096]
+
+goal_pose_0 = PoseStamped()
+goal_pose_0.header.frame_id = 'map'
+goal_pose_0.pose.position.x = -0.2771758735179901
+goal_pose_0.pose.position.y = 4.2819342613220215
+goal_pose_0.pose.orientation.z = -0.703675035019984
+goal_pose_0.pose.orientation.w = 0.7105219525740386
+
+goal_pose_1 = PoseStamped()
+goal_pose_1.header.frame_id = 'map'
+goal_pose_1.pose.position.x = -0.28993892669677734
+goal_pose_1.pose.position.y = 0.6936071515083313
+goal_pose_1.pose.orientation.z = -0.3982631759490014
+goal_pose_1.pose.orientation.w = 0.9172711936406892
+
+goal_pose_2 = PoseStamped()
+goal_pose_2.header.frame_id = 'map'
+goal_pose_2.pose.position.x = 2.10793399810791
+goal_pose_2.pose.position.y = -0.7233690619468689
+goal_pose_2.pose.orientation.z = -0.04502235143141649
+goal_pose_2.pose.orientation.w = 0.9989859798173276
+
+goal_pose_3 = PoseStamped()
+goal_pose_3.header.frame_id = 'map'
+goal_pose_3.pose.position.x = 5.73236608505249
+goal_pose_3.pose.position.y = 0.42093905806541443
+goal_pose_3.pose.orientation.z = 0.6143301105027971
+goal_pose_3.pose.orientation.w = 0.7890491209865335
+
+goal_pose_4 = PoseStamped()
+goal_pose_4.header.frame_id = 'map'
+goal_pose_4.pose.position.x = 5.215056896209717
+goal_pose_4.pose.position.y = 2.563694715499878
+goal_pose_4.pose.orientation.z = 0.9743407143987215
+goal_pose_4.pose.orientation.w = 0.22507814701784992
+
+goal_pose_5 = PoseStamped()
+goal_pose_5.header.frame_id = 'map'
+goal_pose_5.pose.position.x = 1.1207115650177002
+goal_pose_5.pose.position.y = 3.7280900478363037
+goal_pose_5.pose.orientation.z = 0.9926303026289666
+goal_pose_5.pose.orientation.w = 0.12118202136755257
+

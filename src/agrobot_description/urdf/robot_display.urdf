@@ -1,0 +1,369 @@
+<?xml version="1.0"?>
+<!-- 机器人的URDF描述文件 -->
+
+<robot name="robot">
+
+  <!-- 机器人的底盘 -->
+  <link name="base_footprint"/>
+
+  <!-- 底盘和基本连接处的关节 -->
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0.0 0.0 0.076" rpy="0 0 0"/>
+  </joint>
+
+  <!-- 机器人的主体链接 -->
+  <link name="base_link">
+    <!-- 可视化描述 -->
+    <visual>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.12" radius="0.10"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0.1 0.1 1.0 0.5" /> <!-- 蓝色半透明材质 -->
+      </material>
+    </visual>
+    <!-- 碰撞检测描述 -->
+    <collision>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.12" radius="0.10"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0.1 0.1 1.0 0.5" /> <!-- 蓝色半透明材质 -->
+      </material>
+    </collision>
+    <!-- 惯性描述 -->
+    <inertial>
+      <mass value="0.2"/> <!-- 质量 -->
+      <inertia ixx="0.0122666" ixy="0" ixz="0" iyy="0.0122666" iyz="0" izz="0.02"/> <!-- 转动惯量 -->
+    </inertial>
+  </link>
+    
+  <!-- 激光传感器链接 -->
+  <link name="laser_link">
+    <!-- 可视化描述 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.02" radius="0.02"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 0.5" /> <!-- 黑色半透明材质 -->
+      </material>
+    </visual>
+    <!-- 碰撞检测描述 -->
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.02" radius="0.02"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 0.5" /> <!-- 黑色半透明材质 -->
+      </material>
+    </collision>
+    <!-- 惯性描述 -->
+    <inertial>
+      <mass value="0.1"/> <!-- 质量 -->
+      <inertia ixx="0.000190416666667" ixy="0" ixz="0" iyy="0.0001904" iyz="0" izz="0.00036"/> <!-- 转动惯量 -->
+    </inertial>
+  </link>
+  
+  <!-- 激光传感器和主体连接处的关节 -->
+  <joint name="laser_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="laser_link" />
+    <origin xyz="0 0 0.075" /> <!-- 相对于base_link的位置 -->
+  </joint>
+
+  <!-- IMU链接 -->
+  <link name="imu_link">
+    <!-- 可视化描述 -->
+    <visual>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.02 0.02 0.02"/>
+      </geometry>
+    </visual>
+    <!-- 碰撞检测描述 -->
+    <collision>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.02 0.02 0.02"/>
+      </geometry>
+    </collision>
+    <!-- 惯性描述 -->
+    <inertial>
+      <mass value="0.1"/> <!-- 质量 -->
+      <inertia ixx="0.000190416666667" ixy="0" ixz="0" iyy="0.0001904" iyz="0" izz="0.00036"/> <!-- 转动惯量 -->
+    </inertial>
+  </link>
+
+  <!-- IMU和主体连接处的关节 -->
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="imu_link" />
+    <origin xyz="0 0 0.02" /> <!-- 相对于base_link的位置 -->
+  </joint>
+
+  <!-- 左轮链接 -->
+  <link name="left_wheel_link">
+    <!-- 可视化描述 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57079 0 0"/>
+      <geometry>
+        <cylinder length="0.04" radius="0.032"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 0.5" /> <!-- 黑色半透明材质 -->
+      </material>
+    </visual>
+    <!-- 碰撞检测描述 -->
+    <collision>
+      <origin xyz="0 0 0" rpy="1.57079 0 0"/>
+      <geometry>
+        <cylinder length="0.04" radius="0.032"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 0.5" /> <!-- 黑色半透明材质 -->
+      </material>
+    </collision>
+    <!-- 惯性描述 -->
+    <inertial>
+      <mass value="0.2"/> <!-- 质量 -->
+      <inertia ixx="0.000190416666667" ixy="0" ixz="0" iyy="0.0001904" iyz="0" izz="0.00036"/> <!-- 转动惯量 -->
+    </inertial>
+  </link>
+    
+  <!-- 右轮链接 -->
+  <link name="right_wheel_link">
+    <!-- 可视化描述 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57079 0 0"/>
+      <geometry>
+        <cylinder length="0.04" radius="0.032"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 0.5" /> <!-- 黑色半透明材质 -->
+      </material>
+    </visual>
+    <!-- 碰撞检测描述 -->
+    <collision>
+      <origin xyz="0 0 0" rpy="1.57079 0 0"/>
+      <geometry>
+        <cylinder length="0.04" radius="0.032"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 0.5" /> <!-- 黑色半透明材质 -->
+      </material>
+    </collision>
+    <!-- 惯性描述 -->
+    <inertial>
+      <mass value="0.2"/> <!-- 质量 -->
+      <inertia ixx="0.000190416666667" ixy="0" ixz="0" iyy="0.0001904" iyz="0" izz="0.00036"/> <!-- 转动惯量 -->
+    </inertial>
+  </link>
+    
+  <!-- 左轮关节 -->
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="left_wheel_link" />
+    <origin xyz="-0.02 0.10 -0.06" /> <!-- 相对于base_link的位置 -->
+    <axis xyz="0 1 0" /> <!-- 转动轴方向 -->
+  </joint>
+
+  <!-- 右轮关节 -->
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="right_wheel_link" />
+    <origin xyz="-0.02 -0.10 -0.06" /> <!-- 相对于base_link的位置 -->
+    <axis xyz="0 1 0" /> <!-- 转动轴方向 -->
+  </joint>
+
+  <!-- 转向轮链接 -->
+  <link name="caster_link">
+    <!-- 可视化描述 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57079 0 0"/>
+      <geometry>
+        <sphere radius="0.016"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 0.5" /> <!-- 黑色半透明材质 -->
+      </material>
+    </visual>
+    <!-- 碰撞检测描述 -->
+    <collision>
+      <origin xyz="0 0 0" rpy="1.57079 0 0"/>
+      <geometry>
+        <sphere radius="0.016"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 0.5" /> <!-- 黑色半透明材质 -->
+      </material>
+    </collision>
+    <!-- 惯性描述 -->
+    <inertial>
+      <mass value="0.02"/> <!-- 质量 -->
+      <inertia ixx="0.000190416666667" ixy="0" ixz="0" iyy="0.0001904" iyz="0" izz="0.00036"/> <!-- 转动惯量 -->
+    </inertial>
+  </link>
+    
+  <!-- 转向轮关节 -->
+  <joint name="caster_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="caster_link" />
+    <origin xyz="0.06 0.0 -0.076" /> <!-- 相对于base_link的位置 -->
+    <axis xyz="0 1 0" /> <!-- 转动轴方向 -->
+  </joint>
+
+  <!-- Gazebo模拟 -->
+  <gazebo reference="caster_link">
+    <material>Gazebo/Black</material>
+    <mu1 value="0.0"/> <!-- 摩擦系数 -->
+    <mu2 value="0.0"/>
+    <kp value="1000000.0" /> <!-- 接触点刚度 -->
+    <kd value="10.0" /> <!-- 接触点阻尼 -->
+  </gazebo>
+
+  <!-- 差分驱动插件 -->
+  <gazebo>
+    <plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'>
+      <ros>
+        <namespace>/</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
+      <update_rate>30</update_rate> <!-- 更新频率 -->
+      <!-- 轮子描述 -->
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+      <!-- 运动学参数 -->
+      <wheel_separation>0.2</wheel_separation> <!-- 轮子间距 -->
+      <wheel_diameter>0.065</wheel_diameter> <!-- 轮子直径 -->
+      <!-- 限制 -->
+      <max_wheel_torque>20</max_wheel_torque> <!-- 最大轮子扭矩 -->
+      <max_wheel_acceleration>1.0</max_wheel_acceleration> <!-- 最大轮子加速度 -->
+      <!-- 输出 -->
+      <publish_odom>true</publish_odom> <!-- 发布odom话题 -->
+      <publish_odom_tf>true</publish_odom_tf> <!-- 发布odom TF -->
+      <publish_wheel_tf>true</publish_wheel_tf> <!-- 发布轮子TF -->
+      <odometry_frame>odom</odometry_frame> <!-- 里程计TF坐标系 -->
+      <robot_base_frame>base_footprint</robot_base_frame> <!-- 机器人基座坐标系 -->
+    </plugin>
+  </gazebo>
+
+  <!-- IMU传感器 -->
+  <gazebo reference="imu_link">
+    <sensor name="imu_sensor" type="imu">
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <ros>
+          <namespace>/</namespace>
+          <remapping>~/out:=imu</remapping>
+        </ros>
+        <initial_orientation_as_reference>false</initial_orientation_as_reference> <!-- 初始方向作为参考 -->
+      </plugin>
+      <always_on>true</always_on> <!-- 始终开启 -->
+      <update_rate>100</update_rate> <!-- 更新频率 -->
+      <visualize>true</visualize> <!-- 可视化 -->
+      <!-- IMU传感器误差模型 -->
+      <imu>
+        <angular_velocity>
+          <x>
+            <noise type="gaussian">
+              <mean>0.0</mean>
+              <stddev>2e-4</stddev>
+              <bias_mean>0.0000075</bias_mean>
+              <bias_stddev>0.0000008</bias_stddev>
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+              <mean>0.0</mean>
+              <stddev>2e-4</stddev>
+              <bias_mean>0.0000075</bias_mean>
+              <bias_stddev>0.0000008</bias_stddev>
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+              <mean>0.0</mean>
+              <stddev>2e-4</stddev>
+              <bias_mean>0.0000075</bias_mean>
+              <bias_stddev>0.0000008</bias_stddev>
+            </noise>
+          </z>
+        </angular_velocity>
+        <linear_acceleration>
+          <x>
+            <noise type="gaussian">
+              <mean>0.0</mean>
+              <stddev>1.7e-2</stddev>
+              <bias_mean>0.1</bias_mean>
+              <bias_stddev>0.001</bias_stddev>
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+              <mean>0.0</mean>
+              <stddev>1.7e-2</stddev>
+              <bias_mean>0.1</bias_mean>
+              <bias_stddev>0.001</bias_stddev>
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+              <mean>0.0</mean>
+              <stddev>1.7e-2</stddev>
+              <bias_mean>0.1</bias_mean>
+              <bias_stddev>0.001</bias_stddev>
+            </noise>
+          </z>
+        </linear_acceleration>
+      </imu>
+    </sensor>
+  </gazebo>
+
+  <!-- 激光传感器 -->
+  <gazebo reference="laser_link">
+    <sensor name="laser_sensor" type="ray">
+      <always_on>true</always_on> <!-- 始终开启 -->
+      <visualize>true</visualize> <!-- 可视化 -->
+      <update_rate>10.0</update_rate> <!-- 更新频率 -->
+      <pose>0 0 0.075 0 0 0</pose> <!-- 位姿 -->
+      <!-- 射线描述 -->
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>180</samples> <!-- 采样点数 -->
+            <resolution>1.000000</resolution> <!-- 分辨率 -->
+            <min_angle>-1.570000</min_angle> <!-- 最小角度 -->
+            <max_angle>1.570000</max_angle> <!-- 最大角度 -->
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.120000</min> <!-- 最小检测距离 -->
+          <max>10.0</max> <!-- 最大检测距离 -->
+          <resolution>0.015000</resolution> <!-- 分辨率 -->
+        </range>
+        <noise>
+          <type>gaussian</type> <!-- 噪声类型 -->
+          <mean>0.0</mean> <!-- 均值 -->
+          <stddev>0.01</stddev> <!-- 标准差 -->
+        </noise>
+      </ray>
+
+      <!-- 激光传感器ROS插件 -->
+      <plugin name="laserscan" filename="libgazebo_ros_ray_sensor.so">
+        <ros>
+          <remapping>~/out:=scan</remapping>
+        </ros>
+        <output_type>sensor_msgs/LaserScan</output_type> <!-- 输出消息类型 -->
+        <frame_name>laser_link</frame_name> <!-- 框架名 -->
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>
