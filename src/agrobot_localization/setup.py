@@ -13,7 +13,8 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         (os.path.join('share', package_name, 'config'), glob('config/*')),
-        (os.path.join('share', package_name, 'launch'), glob('launch/*'))
+        (os.path.join('share', package_name, 'launch'), glob('launch/*')),
+        (os.path.join('share', package_name, 'fusion_config'), glob('fusion_config/*')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -24,7 +25,6 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "ekf = agrobot_localization.kalman_filter:main"
         ],
     },
 )

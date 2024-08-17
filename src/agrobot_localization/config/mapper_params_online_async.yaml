@@ -35,7 +35,7 @@ slam_toolbox:
     transform_timeout: 0.2  # 变换的超时时间（秒），超过此时间未获取到变换时将视为超时，有助于处理延迟问题。
     tf_buffer_duration: 30.0  # TF（坐标变换）缓存的持续时间（秒），设置为30秒以确保足够的历史数据供查询。
     stack_size_to_use: 40000000  # 程序所需的堆栈大小（字节），在处理大规模地图时需要较大的堆栈空间以避免溢出。
-    enable_interactive_mode: true  # 启用交互模式，允许用户在RViz中手动调整地图和位姿，用于更直观的操作和调试。
+    enable_interactive_mode: true  # 启用交互模式，
 
     # 通用参数
     use_scan_matching: true  # 是否启用扫描匹配功能，启用后可以提高地图构建和定位的精度，特别是在特征稀少的环境中。

@@ -17,7 +17,7 @@ slam_toolbox:
     mode: localization  # 设置为localization模式以执行定位任务。设置为mapping则用于建图。
 
     # 如果希望在启动时立即从某个位置开始定位或继续建图
-    map_file_name: '/root/ros2_projects/simulation_agrobot_ws/src/agrobot_mapping/maps/map56'  # 地图文件的路径和名称，提供此文件将从该地图开始定位。
+    map_file_name: '/root/ros2_projects/simulation_agrobot_ws/src/agrobot_mapping/maps/small_house'  # 地图文件的路径和名称，提供此文件将从该地图开始定位。
     map_start_pose: [1.0, 1.0, 0.0]  # 地图中的起始位姿，表示机器人在地图中的初始位置，格式为[x, y, theta]。
 
     debug_logging: false  # 是否启用调试日志输出，false表示关闭调试日志，减少不必要的输出。
@@ -35,8 +35,8 @@ slam_toolbox:
     # 通用参数
     use_scan_matching: true  # 是否启用扫描匹配功能，启用后可以提高地图构建和定位的精度，特别是在特征稀少的环境中。
     use_scan_barycenter: true  # 是否使用扫描的重心进行匹配，启用后可以增加匹配的稳定性和准确性。
-    minimum_travel_distance: 0.01  # 机器人必须移动的最小距离（米），超过此距离才会更新地图，避免不必要的更新。
-    minimum_travel_heading: 0.01  # 机器人必须转动的最小角度（弧度），超过此角度才会更新地图，避免频繁更新。
+    minimum_travel_distance: 0.001  # 机器人必须移动的最小距离（米），超过此距离才会更新地图，避免不必要的更新。
+    minimum_travel_heading: 0.001  # 机器人必须转动的最小角度（弧度），超过此角度才会更新地图，避免频繁更新。
     scan_buffer_size: 3  # 扫描数据缓冲区的大小，用于存储最近的激光扫描数据，以便进行匹配和分析。
     scan_buffer_maximum_scan_distance: 10.0  # 扫描缓冲区内允许的最大扫描距离（米），超过此距离的数据将被丢弃。
     link_match_minimum_response_fine: 0.1  # 细粒度匹配的最小响应值，低于此值的匹配将被忽略，视为不可靠。

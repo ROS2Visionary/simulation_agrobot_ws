@@ -20,14 +20,14 @@ def generate_launch_description():
     )
 
     # * 不会修改地图，只会临时在地图上显示激光雷达扫到的新的障碍物，激光雷达扫描过后将会清除新的障碍物痕迹
-    # slam_config = os.path.join(get_package_share_directory("agrobot_localization"), "config", "mapper_params_localization.yaml") 
+    slam_config = os.path.join(get_package_share_directory("agrobot_localization"), "config", "mapper_params_localization.yaml") 
     # * 会修改地图，会在地图上显示激光雷达扫到的新的障碍物，激光雷达扫描过后不会清除新的障碍物痕迹
-    slam_config = os.path.join(get_package_share_directory("agrobot_localization"), "config", "mapper_params_online_async.yaml")
+    # slam_config = os.path.join(get_package_share_directory("agrobot_localization"), "config", "mapper_params_online_async.yaml")
 
     # 包含SLAM工具箱的启动文件，用于启动SLAM节点
     localization_node = IncludeLaunchDescription(
-        # PythonLaunchDescriptionSource([get_package_share_directory("slam_toolbox"), "/launch", "/localization_launch.py"]),
-        PythonLaunchDescriptionSource([get_package_share_directory("slam_toolbox"), "/launch", "/online_async_launch.py"]),
+        PythonLaunchDescriptionSource([get_package_share_directory("slam_toolbox"), "/launch", "/localization_launch.py"]),
+        # PythonLaunchDescriptionSource([get_package_share_directory("slam_toolbox"), "/launch", "/online_async_launch.py"]),
         launch_arguments={
             "use_sim_time": use_sim_time,  # 传递是否使用仿真时间的参数给SLAM节点
             "slam_params_file": slam_config  # 传递SLAM配置文件的路径给SLAM节点
