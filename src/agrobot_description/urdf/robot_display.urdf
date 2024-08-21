@@ -43,7 +43,7 @@
   </link>
     
   <!-- 激光传感器链接 -->
-  <link name="laser_link">
+  <link name="liser_link">
     <!-- 可视化描述 -->
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -74,7 +74,7 @@
   <!-- 激光传感器和主体连接处的关节 -->
   <joint name="laser_joint" type="fixed">
     <parent link="base_link" />
-    <child link="laser_link" />
+    <child link="liser_link" />
     <origin xyz="0 0 0.075" /> <!-- 相对于base_link的位置 -->
   </joint>
 
@@ -236,7 +236,7 @@
         <remapping>cmd_vel:=cmd_vel</remapping>
         <remapping>odom:=odom</remapping>
       </ros>
-      <update_rate>30</update_rate> <!-- 更新频率 -->
+      <update_rate>20</update_rate> <!-- 更新频率 -->
       <!-- 轮子描述 -->
       <left_joint>left_wheel_joint</left_joint>
       <right_joint>right_wheel_joint</right_joint>
@@ -248,7 +248,7 @@
       <max_wheel_acceleration>1.0</max_wheel_acceleration> <!-- 最大轮子加速度 -->
       <!-- 输出 -->
       <publish_odom>true</publish_odom> <!-- 发布odom话题 -->
-      <publish_odom_tf>true</publish_odom_tf> <!-- 发布odom TF -->
+      <publish_odom_tf>false</publish_odom_tf> <!-- 发布odom TF -->
       <publish_wheel_tf>true</publish_wheel_tf> <!-- 发布轮子TF -->
       <odometry_frame>odom</odometry_frame> <!-- 里程计TF坐标系 -->
       <robot_base_frame>base_footprint</robot_base_frame> <!-- 机器人基座坐标系 -->
@@ -266,7 +266,7 @@
         <initial_orientation_as_reference>false</initial_orientation_as_reference> <!-- 初始方向作为参考 -->
       </plugin>
       <always_on>true</always_on> <!-- 始终开启 -->
-      <update_rate>100</update_rate> <!-- 更新频率 -->
+      <update_rate>20</update_rate> <!-- 更新频率 -->
       <visualize>true</visualize> <!-- 可视化 -->
       <!-- IMU传感器误差模型 -->
       <imu>
@@ -327,7 +327,7 @@
   </gazebo>
 
   <!-- 激光传感器 -->
-  <gazebo reference="laser_link">
+  <gazebo reference="liser_link">
     <sensor name="laser_sensor" type="ray">
       <always_on>true</always_on> <!-- 始终开启 -->
       <visualize>true</visualize> <!-- 可视化 -->
@@ -361,7 +361,7 @@
           <remapping>~/out:=scan</remapping>
         </ros>
         <output_type>sensor_msgs/LaserScan</output_type> <!-- 输出消息类型 -->
-        <frame_name>laser_link</frame_name> <!-- 框架名 -->
+        <frame_name>liser_link</frame_name> <!-- 框架名 -->
       </plugin>
     </sensor>
   </gazebo>

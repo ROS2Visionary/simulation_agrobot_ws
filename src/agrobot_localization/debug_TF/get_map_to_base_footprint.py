@@ -19,7 +19,6 @@ class get_navigation_m3(Node):
         try:
             # 获取当前时间
             now = rclpy.time.Time()
-            # 查找从 'map' 坐标系到 'base_footprint' 坐标系的变换
             trans = self.tf_buffer.lookup_transform('map', 'base_footprint', now, Duration(seconds=1.0))
             
             # 提取平移信息

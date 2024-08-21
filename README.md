@@ -1,8 +1,12 @@
 # simulation_agrobot_ws
-
 source /usr/share/gazebo/setup.sh
 rosdep install --from-paths . --ignore-src -r -y
 colcon build
+
+# localization debug
+colcon build
+source install/setup.sh
+ros2 launch agrobot_localization debug_localization_launch.py 
 
 # bringup - 模拟建图
 colcon build
@@ -47,6 +51,13 @@ source install/setup.sh
 clear
 ros2 launch agrobot_bringup visual_map_launch.py
 
+# bringup - 融合数据
+colcon build
+source /usr/share/gazebo/setup.sh
+source install/setup.sh
+clear
+ros2 launch agrobot_bringup simulation_fusion_launch.py
+
 # 启动仿真gazebo
 colcon build
 source /usr/share/gazebo/setup.sh
@@ -57,6 +68,7 @@ ros2 launch agrobot_description gazebo_launch.py
 # 下载环境创库
 cd src
 wstool update
+cd ..
 
 # 启动键盘控制
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
@@ -70,6 +82,7 @@ ros2 launch --show-args nav2_bringup navigation_launch.py
 ros2 launch --show-args slam_toolbox online_async_launch.py
 ros2 launch --show-args slam_toolbox localization_launch.py
 ros2 launch --show-args slam_toolbox lifelong_launch.py
+ros2 launch --show-args robot_localization ukf.launch.py
 
 # GitHub地址 - 库地址
 https://github.com/ros-navigation/navigation2
