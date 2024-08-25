@@ -18,7 +18,7 @@ ros2 launch agrobot_arm_config demo.launch.py
 
 # MoveIt自带示例
 source install/setup.sh
-ros2 launch panda_moveit_config demo.launch.py
+ros2 launch moveit_resources_panda_moveit_config demo.launch.py
 
 
 # 启动rviz - 机械臂

@@ -66,6 +66,9 @@ source /usr/share/gazebo/setup.sh
 source install/setup.sh
 ros2 launch agrobot_description gazebo_launch.py
 
+# 仿真环境GitHub地址
+https://github.com/aws-robotics
+https://github.com/mlherd/Dataset-of-Gazebo-Worlds-Models-and-Maps
 
 # 下载环境创库
 cd src

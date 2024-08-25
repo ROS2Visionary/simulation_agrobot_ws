@@ -30,7 +30,6 @@ def generate_launch_description():
     mapping_launch_name = "/slam_toolbox_mapping_launch.py" # slam_toolbox建图
     # mapping_launch_name = "/custom_mapping_launch.py" # custom建图
     # mapping_launch_name = "/cartographer_mapping_launch.py" # cartographer建图
-
     mapping_node = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([get_package_share_directory("agrobot_mapping"),"/launch",mapping_launch_name]),
         launch_arguments={

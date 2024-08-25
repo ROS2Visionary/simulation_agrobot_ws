@@ -39,8 +39,8 @@ TRAJECTORY_BUILDER_2D.motion_filter.max_angle_radians = math.rad(0.1)  -- 运动
 TRAJECTORY_BUILDER_2D.submaps.num_range_data = 20  -- 每个子地图中的激光雷达数据数量，进一步降低以适应低刷新率
 
 -- 优化扫描匹配和定位的参数
-POSE_GRAPH.constraint_builder.min_score = 0.5  -- 约束生成器的最小得分，进一步降低以提高接受率
-POSE_GRAPH.constraint_builder.global_localization_min_score = 0.6  -- 全局定位的最小得分，进一步降低
+POSE_GRAPH.constraint_builder.min_score = 0.7  -- 约束生成器的最小得分，进一步降低以提高接受率
+POSE_GRAPH.constraint_builder.global_localization_min_score = 0.85  -- 全局定位的最小得分，进一步降低
 POSE_GRAPH.optimize_every_n_nodes = 80  -- 每80个节点进行一次全局优化，适当增加优化频率
 
 return options

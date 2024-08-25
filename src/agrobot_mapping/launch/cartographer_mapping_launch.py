@@ -57,7 +57,7 @@ def generate_launch_description():
     
     # 创建自定义的Map Saver节点，用于定期保存生成的地图
     map_saver_node = Node(
-        package="agrobot_car_mapping",  # 该节点所在的功能包
+        package="agrobot_mapping",  # 该节点所在的功能包
         executable="map_saver",  # 要执行的可执行文件
         name="custom_map_saver",  # 节点的名称
         output="screen",  # 将节点输出打印到屏幕
