@@ -20,8 +20,8 @@ slam_toolbox:
 
     # 如果希望在启动时立即从某个位置继续建图
     # 或者从充电桩位置开始建图，但这两者是互斥的。如果提供了位姿，则使用该位姿
-    map_file_name: '/root/ros2_projects/simulation_agrobot_ws/src/agrobot_mapping/maps/small_house'  # 地图文件的名称，如果提供此文件，将从该地图开始定位或继续建图。
-    map_start_pose: [0.256,0.447,-0.16288]  # 地图中的起始位姿，表示机器人在地图中的初始位置（x, y, theta）。
+    # map_file_name: '/root/ros2_projects/simulation_agrobot_ws/src/agrobot_mapping/maps/small_house'  # 地图文件的名称，如果提供此文件，将从该地图开始定位或继续建图。
+    # map_start_pose: [0.256,0.447,-0.16288]  # 地图中的起始位姿，表示机器人在地图中的初始位置（x, y, theta）。
     #map_start_at_dock: true  # 是否从充电桩位置开始建图，如果设置为true，机器人会假设自己从充电桩位置出发。
 
     debug_logging: false  # 是否启用调试日志输出，设置为false以减少不必要的日志信息，适合日常运行时使用。

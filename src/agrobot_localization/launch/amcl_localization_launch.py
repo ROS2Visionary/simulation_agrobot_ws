@@ -3,7 +3,7 @@ import launch
 from launch import LaunchDescription  # 用于定义launch文件的描述
 from launch.actions import DeclareLaunchArgument  # 用于声明launch参数
 from ament_index_python.packages import get_package_share_directory  # 用于获取ROS 2包的共享目录
-from launch_ros.actions import Node  # 用于启动ROS 2节点
+from launch_ros.actions import Node,LifecycleNode  # 用于启动ROS 2节点
 from launch_ros.substitutions import FindPackageShare  # 用于找到功能包的共享目录（此处未使用）
 from launch.substitutions import LaunchConfiguration  # 用于处理launch文件中的动态参数
 
@@ -17,7 +17,7 @@ def generate_launch_description():
     amcl_config_path = os.path.join(pkg_share_dir, "config", "amcl.yaml")
     
     # 获取"agrobot_mapping"包中已保存地图文件的路径
-    map_path = os.path.join(get_package_share_directory("agrobot_mapping"), "maps", "map.yaml")
+    map_path = os.path.join(get_package_share_directory("agrobot_mapping"), "maps", "small_house.yaml")
     
     
     # 定义一个launch参数"use_sim_time"，用于决定是否使用仿真时间
@@ -82,4 +82,5 @@ def generate_launch_description():
                               arg_amcl_config,
                               nav2_map_server_node,
                               nav2_amcl_node,
-                              nav2_lifecycle_manager_node])
+                              nav2_lifecycle_manager_node
+                                ])

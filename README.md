@@ -1,12 +1,3 @@
-# simulation_agrobot_ws
-source /usr/share/gazebo/setup.sh
-rosdep install --from-paths . --ignore-src -r -y
-colcon build
-
-# localization debug
-colcon build
-source install/setup.sh
-ros2 launch agrobot_localization debug_localization_launch.py 
 
 # bringup - 模拟建图
 colcon build
@@ -20,23 +11,29 @@ source /usr/share/gazebo/setup.sh
 source install/setup.sh
 ros2 launch agrobot_bringup simulation_localization_launch.py
 
-# bringup - 模拟导航
+# bringup - 模拟导航 amcl
 colcon build
 source /usr/share/gazebo/setup.sh
 source install/setup.sh
 ros2 launch agrobot_bringup simulation_nav_launch.py
-   
+
+# bringup - 模拟导航 slam
+colcon build
+source /usr/share/gazebo/setup.sh
+source install/setup.sh
+ros2 launch agrobot_bringup simulation_nav_slam_launch.py
+
 # bringup - 模拟导航 & 建图
 colcon build
 source /usr/share/gazebo/setup.sh
 source install/setup.sh
-ros2 launch agrobot_bringup simulation_nav_with_slam_launch.py
+ros2 launch agrobot_bringup simulation_nav_slam_mapping_launch.py
 
 # bringup - 模拟导航 & 建图 & KeepoutFilter
 colcon build
 source /usr/share/gazebo/setup.sh
 source install/setup.sh
-ros2 launch agrobot_bringup simulation_nav_with_slam_KFilter_launch.py
+ros2 launch agrobot_bringup simulation_nav_slam_KFilter_launch.py
 
 # bringup - 模拟导航 & KeepoutFilter 
 colcon build
@@ -57,6 +54,11 @@ source /usr/share/gazebo/setup.sh
 source install/setup.sh
 clear
 ros2 launch agrobot_bringup simulation_fusion_launch.py
+
+# localization debug
+colcon build
+source install/setup.sh
+ros2 launch agrobot_localization debug_localization_launch.py 
 
 # 启动仿真gazebo
 colcon build

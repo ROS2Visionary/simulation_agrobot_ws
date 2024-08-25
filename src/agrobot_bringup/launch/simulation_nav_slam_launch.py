@@ -19,7 +19,7 @@ def generate_launch_description():
     )
 
     slam_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([get_package_share_directory("agrobot_navigation"),"/launch","/nav2_with_slam_launch.py"]),
+        PythonLaunchDescriptionSource([get_package_share_directory("agrobot_navigation"),"/launch","/nav2_slam_launch.py"]),
         launch_arguments={
             "use_sim_time":use_sim_time,
             }.items()

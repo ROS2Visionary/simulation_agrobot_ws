@@ -20,8 +20,8 @@ slam_toolbox:
 
     # 如果希望在启动时立即从某个位置继续建图
     # 或者从充电桩位置开始建图，但这两者是互斥的。如果提供了位姿，则使用该位姿
-    #map_file_name: test_steve  # 地图文件的名称，指定该文件后SLAM工具箱将在启动时加载并继续建图。
-    # map_start_pose: [0.0, 0.0, 0.0]  # 地图起始位姿，指定机器人在地图中的初始位置（x, y, theta）。
+    # map_file_name: ''  # 地图文件的名称，如果提供此文件，将从该地图开始定位或继续建图。
+    # map_start_pose: [0.0, 0.0, 0.0]  # 地图中的起始位姿，表示机器人在地图中的初始位置（x, y, theta）。
     #map_start_at_dock: true  # 是否从充电桩位置开始建图，如果设置为true，机器人会假设自己从充电桩位置出发。
 
     debug_logging: false  # 是否启用调试日志输出，设置为false以减少不必要的日志信息，适合日常运行时使用。
@@ -35,13 +35,13 @@ slam_toolbox:
     transform_timeout: 0.2  # 变换的超时时间（秒），超过此时间未获取到变换时将视为超时，有助于处理延迟问题。
     tf_buffer_duration: 30.0  # TF（坐标变换）缓存的持续时间（秒），设置为30秒以确保足够的历史数据供查询。
     stack_size_to_use: 40000000  # 程序所需的堆栈大小（字节），在处理大规模地图时需要较大的堆栈空间以避免溢出。
-    enable_interactive_mode: false  # 启用交互模式，允许用户在RViz中手动调整地图和位姿，用于更直观的操作和调试。
+    enable_interactive_mode: true  # 启用交互模式，允许用户在RViz中手动调整地图和位姿，用于更直观的操作和调试。
 
     # 通用参数
     use_scan_matching: true  # 是否启用扫描匹配功能，启用后可以提高地图构建和定位的精度，特别是在特征稀少的环境中。
     use_scan_barycenter: true  # 是否使用扫描的重心进行匹配，启用后可以增加匹配的稳定性和准确性。
-    minimum_travel_distance: 0.5  # 机器人必须移动的最小距离（米），超过此距离才会更新地图，用于避免不必要的更新。
-    minimum_travel_heading: 0.5  # 机器人必须转动的最小角度（弧度），超过此角度才会更新地图，避免频繁更新。
+    minimum_travel_distance: 0.001  # 机器人必须移动的最小距离（米），超过此距离才会更新地图，用于避免不必要的更新。
+    minimum_travel_heading: 0.001  # 机器人必须转动的最小角度（弧度），超过此角度才会更新地图，避免频繁更新。
     scan_buffer_size: 10  # 扫描数据缓冲区的大小，用于存储最近的激光扫描数据，以便进行匹配和分析。
     scan_buffer_maximum_scan_distance: 10.0  # 扫描缓冲区内允许的最大扫描距离（米），超过此距离的数据将被丢弃。
     link_match_minimum_response_fine: 0.1  # 细粒度匹配的最小响应值，低于此值的匹配将被视为不可靠，从而忽略。

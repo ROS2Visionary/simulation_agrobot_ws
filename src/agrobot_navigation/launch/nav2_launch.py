@@ -10,7 +10,7 @@ from launch.actions import IncludeLaunchDescription
 
 def generate_launch_description():
         
-    map_yaml_path = os.path.join(get_package_share_directory("agrobot_mapping"),"maps","map_56.yaml")
+    map_yaml_path = os.path.join(get_package_share_directory("agrobot_mapping"),"maps","small_house.yaml")
     nav2_param_path = os.path.join(get_package_share_directory("agrobot_navigation"),"config","nav2_params.yaml")
     
     use_sim_time = LaunchConfiguration("use_sim_time")

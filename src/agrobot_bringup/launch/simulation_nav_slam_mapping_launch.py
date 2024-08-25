@@ -1,7 +1,7 @@
 import os
 import launch
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument,TimerAction
 from ament_index_python.packages import get_package_share_directory
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -18,8 +18,8 @@ def generate_launch_description():
         default_value="True"
     )
 
-    nav_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([get_package_share_directory("agrobot_navigation"),"/launch","/nav2_with_slam_KFilter_launch.py"]),
+    slam_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([get_package_share_directory("agrobot_navigation"),"/launch","/nav2_slam_maping_launch.py"]),
         launch_arguments={
             "use_sim_time":use_sim_time,
             }.items()
@@ -27,22 +27,19 @@ def generate_launch_description():
 
     gazebo_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([get_package_share_directory("agrobot_description"),"/launch","/gazebo_launch.py"]),
-        launch_arguments={
-            "use_sim_time":use_sim_time,
-            }.items()
     )
     
     tf_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([get_package_share_directory("agrobot_bringup"),"/launch","/static_tf_launch.py"]),
-        launch_arguments={
-            "use_sim_time":use_sim_time
-            }.items()
     )
 
     return LaunchDescription([arg_sim,
                               gazebo_launch,
-                              nav_launch,
                               tf_launch,
+                              TimerAction(
+                                  period=10.0,
+                                  actions=[slam_launch]
+                              )
                               ])
     
     

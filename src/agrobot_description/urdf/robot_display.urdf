@@ -248,7 +248,7 @@
       <max_wheel_acceleration>1.0</max_wheel_acceleration> <!-- 最大轮子加速度 -->
       <!-- 输出 -->
       <publish_odom>true</publish_odom> <!-- 发布odom话题 -->
-      <publish_odom_tf>false</publish_odom_tf> <!-- 发布odom TF -->
+      <publish_odom_tf>true</publish_odom_tf> <!-- 发布odom TF -->
       <publish_wheel_tf>true</publish_wheel_tf> <!-- 发布轮子TF -->
       <odometry_frame>odom</odometry_frame> <!-- 里程计TF坐标系 -->
       <robot_base_frame>base_footprint</robot_base_frame> <!-- 机器人基座坐标系 -->

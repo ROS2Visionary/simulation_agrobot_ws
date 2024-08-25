@@ -34,6 +34,7 @@ def generate_launch_description():
         }.items()  # 将参数以键值对的形式传递给包含的Launch文件
     )
 
+
     # 创建并返回LaunchDescription对象，包含启动所需的所有节点和参数声明
     return LaunchDescription([
         arg_sim,  # 声明使用仿真时间的参数

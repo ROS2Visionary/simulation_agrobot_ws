@@ -58,8 +58,8 @@ def generate_launch_description():
     return LaunchDescription([
         arg_sim,  # 首先声明的参数
         async_slam_toolbox,  # 然后包含slam_toolbox的launch文件
-        # TimerAction(
-        #     period=10.0,  # 指定10秒的延迟
-        #     actions=[map_saver_node, sequence_map_saver_node]  # 定时启动两个地图保存节点
-        # )
+        TimerAction(
+            period=10.0,  # 指定10秒的延迟
+            actions=[map_saver_node, sequence_map_saver_node]  # 定时启动两个地图保存节点
+        )
     ])
