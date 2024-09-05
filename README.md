@@ -88,6 +88,8 @@ ros2 launch --show-args slam_toolbox online_async_launch.py
 ros2 launch --show-args slam_toolbox localization_launch.py
 ros2 launch --show-args slam_toolbox lifelong_launch.py
 ros2 launch --show-args robot_localization ukf.launch.py
+ros2 launch --show-args rtabmap_launch rtabmap.launch.py
+
 
 # GitHub地址 - 库地址
 https://github.com/ros-navigation/navigation2

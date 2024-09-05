@@ -219,6 +219,40 @@
     <axis xyz="0 1 0" /> <!-- 转动轴方向 -->
   </joint>
 
+  
+  <!-- 深度相机链接 -->
+  <link name="depth_camera_link">
+    <!-- 可视化描述 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.1 0.05"/> <!-- 相机外壳的形状 -->
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 0.8" /> <!-- 灰色半透明材质 -->
+      </material>
+    </visual>
+    <!-- 碰撞检测描述 -->
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.1 0.05"/> <!-- 相机外壳的形状 -->
+      </geometry>
+    </collision>
+    <!-- 惯性描述 -->
+    <inertial>
+      <mass value="0.1"/> <!-- 质量 -->
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/> <!-- 转动惯量 -->
+    </inertial>
+  </link>
+
+  <!-- 深度相机与主体的关节 -->
+  <joint name="depth_camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="depth_camera_link"/>
+    <origin xyz="0.1 0 0.1" rpy="0 0 0"/> <!-- 相对于base_link的位置，调整位置以适应实际模型 -->
+  </joint>
+
   <!-- Gazebo模拟 -->
   <gazebo reference="caster_link">
     <material>Gazebo/Black</material>
@@ -365,5 +399,33 @@
       </plugin>
     </sensor>
   </gazebo>
+
+    <!-- Gazebo中的深度相机 -->
+  <gazebo reference="depth_camera_link">
+    <sensor type="depth" name="depth_camera_sensor">
+      <always_on>true</always_on> <!-- 始终开启 -->
+      <update_rate>30</update_rate> <!-- 更新频率 -->
+      <pose>0 0 0 0 0 0</pose> <!-- 相机相对于链接的位置 -->
+      <!-- 深度相机的配置 -->
+      <depth>
+        <near_clip>0.3</near_clip> <!-- 最近检测距离 -->
+        <far_clip>5.0</far_clip> <!-- 最远检测距离 -->
+        <width>640</width> <!-- 图像宽度 -->
+        <height>480</height> <!-- 图像高度 -->
+        <horizontal_fov>1.047</horizontal_fov> <!-- 水平视场角（约60度） -->
+      </depth>
+      <!-- Gazebo ROS 插件 -->
+      <plugin name="gazebo_ros_openni_kinect" filename="libgazebo_ros_openni_kinect.so">
+        <cameraName>depth_camera</cameraName>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>30.0</updateRate> <!-- 更新频率 -->
+        <cameraInfoTopicName>/camera/depth/camera_info</cameraInfoTopicName> <!-- 相机信息话题 -->
+        <depthImageTopicName>/camera/depth/image_raw</depthImageTopicName> <!-- 深度图像话题 -->
+        <pointCloudTopicName>/camera/depth/points</pointCloudTopicName> <!-- 点云话题 -->
+        <frameName>depth_camera_link</frameName> <!-- 框架名 -->
+      </plugin>
+    </sensor>
+  </gazebo>
+
 
 </robot>
