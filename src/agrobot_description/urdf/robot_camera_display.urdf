@@ -219,6 +219,48 @@
     <axis xyz="0 1 0" /> <!-- 转动轴方向 -->
   </joint>
 
+  
+  <!-- 深度相机链接 -->
+  <link name="depth_camera_link">
+    <!-- 可视化描述 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.1 0.03"/> <!-- 相机外壳的形状 -->
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 0.8" /> <!-- 灰色半透明材质 -->
+      </material>
+    </visual>
+    <!-- 碰撞检测描述 -->
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.1 0.03"/> <!-- 相机外壳的形状 -->
+      </geometry>
+    </collision>
+    <!-- 惯性描述 -->
+    <inertial>
+      <mass value="0.1"/> <!-- 质量 -->
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/> <!-- 转动惯量 -->
+    </inertial>
+  </link>
+
+  <!-- 深度相机与主体的关节 -->
+  <joint name="depth_camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="depth_camera_link"/>
+    <origin xyz="0.1 0 0.6" rpy="0 0 0"/> <!-- 相对于base_link的位置，调整位置以适应实际模型 -->
+  </joint>
+
+  <!-- 在RVIZ中显示点云位姿错误，此处加入一个空连杆和空关节，用于调整点云tf位姿 -->
+  <link name="link_camera_fake"></link>
+  <joint name="joint_camera_fake" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+    <parent link="depth_camera_link"/>
+    <child link="link_camera_fake"/>
+  </joint>
+
 
   <!-- Gazebo模拟 -->
   <gazebo reference="caster_link">
@@ -366,5 +408,67 @@
       </plugin>
     </sensor>
   </gazebo>
+
+  
+  <gazebo reference="depth_camera_link">
+      <sensor type="depth" name="my_sensor">
+          <!-- 设置传感器始终开启 -->
+          <always_on>true</always_on>
+          <!-- 设置传感器的更新频率，单位为Hz -->
+          <update_rate>15.0</update_rate>
+          
+          <!-- 定义相机的参数 -->
+          <camera name="my_camera">
+              <!-- 图像分辨率设置 -->
+              <image>
+                  <width>640</width>  <!-- 图像的宽度，像素单位 -->
+                  <height>480</height> <!-- 图像的高度，像素单位 -->
+              </image>
+              
+              <!-- 相机的裁剪平面，控制相机的检测范围 -->
+              <clip>
+                  <near>0.1</near>  <!-- 相机最近可以检测到的距离，单位为米 -->
+                  <far>6</far>      <!-- 相机最远可以检测到的距离，单位为米 -->
+              </clip>
+              
+              <!-- 相机的失真参数设置，用于校正镜头的几何失真 -->
+              <distortion>
+                  <k1>0.0</k1>  <!-- 径向失真参数k1 -->
+                  <k2>0.0</k2>  <!-- 径向失真参数k2 -->
+                  <k3>0.0</k3>  <!-- 径向失真参数k3 -->
+                  <p1>0.0</p1>  <!-- 切向失真参数p1 -->
+                  <p2>0.0</p2>  <!-- 切向失真参数p2 -->
+                  <center>0.0 0.0</center>  <!-- 失真校正的中心点坐标 -->
+              </distortion>
+          </camera>
+
+          <!-- 插件部分，用于将深度相机数据发布到ROS系统中 -->
+          <plugin name="plugin_name_whatever" filename="libgazebo_ros_camera.so">
+              <!-- ROS相关配置 -->
+              <ros>
+                  <namespace></namespace> <!-- ROS命名空间，留空表示使用全局命名空间 -->
+                  <!-- 话题重映射，将Gazebo中的相机话题映射到ROS中的话题 -->
+                  <remapping>~/image_raw:=/camera/rgb/image_raw</remapping> <!-- 原始RGB图像数据 -->
+                  <remapping>~/image_rect:=/camera/rgb/image_rect_color</remapping> <!-- 校正后的RGB图像数据 -->
+                  <remapping>~/image_depth:=/camera/depth/image_raw</remapping> <!-- 原始深度图像数据 -->
+                  <remapping>~/depth/disparity:=/camera/depth/disparity</remapping> <!-- 深度图像的视差数据 -->
+                  <remapping>~/camera_info:=/camera/rgb/camera_info</remapping> <!-- RGB相机内参信息 -->
+                  <remapping>~/depth/camera_info:=/camera/depth/camera_info</remapping> <!-- 深度相机内参信息 -->
+                  <remapping>~/points:=/camera/depth/points</remapping> <!-- 点云数据 -->
+                  <remapping>~/camera_trigger:=/camera/trigger</remapping> <!-- 相机触发器数据 -->
+                  <remapping>~/events:=/camera/events</remapping> <!-- 相机事件数据 -->
+                  <remapping>~/diagnostics:=/camera/diagnostics</remapping> <!-- 相机诊断数据 -->
+              </ros>
+
+              <!-- 指定相机的框架名，这里使用了一个虚拟的框架link_camera_fake，以纠正深度相机在RViz中的显示方向 -->
+              <frame_name>link_camera_fake</frame_name>
+              <!-- 用于调整双目相机之间的基线距离，这里设置为0.07米 -->
+              <hack_baseline>0.07</hack_baseline>
+              <!-- 指定相机可以检测的最小深度值，单位为米 -->
+              <min_depth>0.001</min_depth>
+          </plugin>
+      </sensor>
+  </gazebo>
+
 
 </robot>

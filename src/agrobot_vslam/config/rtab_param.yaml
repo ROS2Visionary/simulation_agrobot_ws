@@ -1,220 +1,77 @@
 # param.yaml
 
-# 是否使用双目输入而非RGB-D（默认使用RGB-D）
-stereo: false  
-
-# 是否启动在定位模式下（仅在已知地图中定位，不进行新的建图）
-localization: false  
-
-# 是否启动RTAB-Map的用户界面（可选）
-rtabmap_viz: true  
-
-# 是否启动RVIZ（可选）
-rviz: false  
-
-# 是否使用仿真时间（例如Gazebo仿真中的时间）
-use_sim_time: false  
-
-# ROS的日志级别（可选：debug, info, warn, error）
-log_level: 'info'  
-
-# 设置RTAB-Map的参数配置文件路径（*.ini），由独立应用生成
-cfg: ''  
-
-# 设置rtabmap_viz的配置路径
-gui_cfg: '~/.ros/rtabmap_gui.ini'  
-
-# RVIZ的配置文件路径
-rviz_cfg: '/opt/ros/humble/share/rtabmap_launch/launch/config/rgbd.rviz'  
-
-# 机器人的固定帧ID（通常设置为 "base_link" 或 "base_footprint"）
-frame_id: 'base_link'  
-
-# 如果设置了，TF（坐标变换）将被用于获取里程计数据，而不是使用话题
-odom_frame_id: ''  
-
-# 输出地图的帧ID（TF坐标系）
-map_frame_id: 'map'  
-
-# 地图话题名称
-map_topic: 'map'  
-
-# 是否发布地图与里程计之间的TF
-publish_tf_map: true  
-
-# 节点的命名空间
-namespace: 'rtabmap'  
-
-# 保存/加载地图的路径
-database_path: '~/.ros/rtabmap.db'  
-
-# 单个话题订阅者的队列大小
-topic_queue_size: 1  
-
-# 向后兼容性，使用 "sync_queue_size" 替代
-queue_size: 10  
-
-# 用于传感器输入数据的常规QoS（服务质量）：0=系统默认，1=可靠（Reliable），2=尽力而为（Best Effort）
-qos: 1  
-
-# 等待TF变换的时间（秒）
-wait_for_transform: 0.2  
-
-# 向后兼容性，使用 "args" 替代
-rtabmap_args: ''  
-
-# 用于调试目的，可以为节点设置前缀标签，例如："xterm -e gdb -ex run --args"
-launch_prefix: ''  
-
-# 控制节点输出（屏幕或日志）
-output: 'screen'  
-
-# 设置初始位姿（仅在定位模式下）
-initial_pose: ''  
-
-# 输出目标话题（可以连接到nav2）
-output_goal_topic: '/goal_pose'  
-
-# 使用action服务器而不是发布目标话题，连接到nav2的navigate_to_pose
-use_action_for_goal: false  
-
-# 地面真值的帧ID，例如 "world"
-ground_truth_frame_id: ''  
-
-# 地面真值的基础帧ID，例如 "tracker"，一个与 "frame_id" 匹配的虚拟帧（但在不同的TF树上）
-ground_truth_base_frame_id: ''  
-
-# 如果输入话题的时间戳应该使用近似或精确的时间策略进行同步
-approx_sync: false  
-
-# 最大近似同步间隔时间（秒），0表示无限间隔（用于approx_sync=true）
-approx_sync_max_interval: 0.0  
-
-# RGB相机图像的话题名称
-rgb_topic: '/camera/rgb/image_rect_color'  
-
-# 深度图像的话题名称
-depth_topic: '/camera/depth_registered/image_raw'  
-
-# 相机信息的话题名称
-camera_info_topic: '/camera/rgb/camera_info'  
-
-# 双目相机的命名空间
-stereo_namespace: '/stereo_camera'  
-
-# 左目相机图像的话题名称
-left_image_topic: '/stereo_camera/left/image_rect_color'  
-
-# 右目相机图像的话题名称
-right_image_topic: '/stereo_camera/right/image_rect'  
-
-# 左目相机信息的话题名称
-left_camera_info_topic: '/stereo_camera/left/camera_info'  
-
-# 右目相机信息的话题名称
-right_camera_info_topic: '/stereo_camera/right/camera_info'  
-
-# 是否预先同步RGB和深度图像
-rgbd_sync: false  
-
-# 是否使用近似同步RGB-D
-approx_rgbd_sync: true  
-
-# 是否订阅已同步的RGB-D相关话题，例如使用rtabmap_sync/rgbd_sync节点
-subscribe_rgbd: false  
-
-# RGB-D话题名称
-rgbd_topic: 'rgbd_image'  
-
-# 深度缩放比例
-depth_scale: 1.0  
-
-# 是否订阅压缩图像话题
-compressed: false  
-
-# RGB图像的传输类型（例如：compressed, theora）
-rgb_image_transport: 'compressed'  
-
-# 深度图像的传输类型（例如：compressedDepth）
-depth_image_transport: 'compressedDepth'  
-
-# 是否订阅激光雷达扫描数据
-subscribe_scan: false  
-
-# 激光雷达扫描数据的话题名称
-scan_topic: '/scan'  
-
-# 是否订阅点云类型的扫描数据
-subscribe_scan_cloud: false  
-
-# 点云扫描数据的话题名称
-scan_cloud_topic: '/scan_cloud'  
-
-# 扫描法线估计的最近邻点数量
-scan_normal_k: 0  
-
-# 是否启动RTAB-Map的视觉里程计节点
-visual_odometry: true  
-
-# 是否启动RTAB-Map的ICP（迭代最近点）里程计节点
-icp_odometry: false  
-
-# 里程计话题名称
-odom_topic: 'odom'  
-
-# 视觉/ICP里程计的帧ID（TF）
-vo_frame_id: 'odom'  
-
-# 是否发布里程计的TF变换
-publish_tf_odom: true  
-
-# 如果使用TF获取里程计数据，这是默认的角度方差
-odom_tf_angular_variance: 0.01  
-
-# 如果使用TF获取里程计数据，这是默认的线性方差
-odom_tf_linear_variance: 0.001  
-
-# 里程计的更多参数（覆盖rtabmap_args中的相同参数）
-odom_args: ''  
-
-# 里程计传感器同步
-odom_sensor_sync: false  
-
-# 里程计猜测的帧ID
-odom_guess_frame_id: ''  
-
-# 最小平移变化，用于里程计猜测
-odom_guess_min_translation: 0.0  
-
-# 最小旋转变化，用于里程计猜测
-odom_guess_min_rotation: 0.0  
-
-# IMU话题名称，VIO方法和SLAM图优化（重力约束）使用
-imu_topic: '/imu/data'  
-
-# 等待IMU初始化
-wait_imu_to_init: false  
-
-# 用户数据同步订阅
-subscribe_user_data: false  
-
-# 用户数据话题名称
-user_data_topic: '/user_data'  
-
-# 用户数据异步订阅（速率应低于地图更新速率）
-user_data_async_topic: '/user_data_async'  
-
-# GPS异步订阅话题，用于SLAM图优化和回环检测候选选择
-gps_topic: '/gps/fix'  
-
-# AprilTag话题异步订阅，用于SLAM图优化和回环检测。标签位姿也将根据当前优化后的地图发布。
-tag_topic: '/detections'  
-
-# 标签的线性方差
-tag_linear_variance: 0.0001  
-
-# 标签的角度方差，>=9999表示在优化中忽略旋转，当标签的旋转估计不可靠或未计算时
-tag_angular_variance: 9999.0  
-
-# ArUco检测异步订阅话题，使用tag_linear_variance和tag_angular_variance设置协方差
-fiducial_topic: '/fiducial_transforms'
+stereo: false  # 是否使用双目输入而非RGB-D（默认使用RGB-D）
+localization: false  # 是否启动在定位模式下（仅在已知地图中定位，不进行新的建图）
+rtabmap_viz: true  # 是否启动RTAB-Map的用户界面（可选）
+rviz: false  # 是否启动RVIZ（可选）
+use_sim_time: true  # 是否使用仿真时间（例如Gazebo仿真中的时间）
+log_level: 'info'  # ROS的日志级别（可选：debug, info, warn, error）
+cfg: ''  # 设置RTAB-Map的参数配置文件路径（*.ini），由独立应用生成
+gui_cfg: '~/.ros/rtabmap_gui.ini'  # 设置rtabmap_viz的配置路径
+rviz_cfg: '/opt/ros/humble/share/rtabmap_launch/launch/config/rgbd.rviz'  # RVIZ的配置文件路径
+frame_id: 'base_link'  # 机器人的固定帧ID（通常设置为 "base_link" 或 "base_footprint"）
+odom_frame_id: 'odom'  # 如果设置了，TF（坐标变换）将被用于获取里程计数据，而不是使用话题
+map_frame_id: 'map'  # 输出地图的帧ID（TF坐标系）
+map_topic: 'map'  # 地图话题名称
+publish_tf_map: true  # 是否发布地图与里程计之间的TF
+namespace: 'rtabmap'  # 节点的命名空间
+database_path: '~/.ros/rtabmap.db'  # 保存/加载地图的路径
+topic_queue_size: 1  # 单个话题订阅者的队列大小
+queue_size: 10  # 向后兼容性，使用 "sync_queue_size" 替代
+qos: 1  # 用于传感器输入数据的常规QoS（服务质量）：0=系统默认，1=可靠（Reliable），2=尽力而为（Best Effort）
+wait_for_transform: 0.2  # 等待TF变换的时间（秒）
+rtabmap_args: ''  # 向后兼容性，使用 "args" 替代
+launch_prefix: ''  # 用于调试目的，可以为节点设置前缀标签，例如："xterm -e gdb -ex run --args"
+output: 'screen'  # 控制节点输出（屏幕或日志）
+initial_pose: ''  # 设置初始位姿（仅在定位模式下）
+output_goal_topic: '/goal_pose'  # 输出目标话题（可以连接到nav2）
+use_action_for_goal: false  # 使用action服务器而不是发布目标话题，连接到nav2的navigate_to_pose
+ground_truth_frame_id: ''  # 地面真值的帧ID，例如 "world"
+ground_truth_base_frame_id: ''  # 地面真值的基础帧ID，例如 "tracker"，一个与 "frame_id" 匹配的虚拟帧（但在不同的TF树上）
+approx_sync: true  # 如果输入话题的时间戳应该使用近似或精确的时间策略进行同步
+approx_sync_max_interval: 0.0  # 最大近似同步间隔时间（秒），0表示无限间隔（用于approx_sync=true）
+rgb_topic: '/camera/rgb/image_raw'  # RGB相机图像的话题名称
+rgb_rect_topic: '/camera/rgb/image_rect_color'  # 校正后的RGB相机图像话题名称
+depth_topic: '/camera/depth/image_raw'  # 深度图像的话题名称
+depth_disparity_topic: '/camera/depth/disparity'  # 深度视差图像的话题名称
+camera_info_topic: '/camera/rgb/camera_info'  # RGB相机信息话题名称
+depth_camera_info_topic: '/camera/depth/camera_info'  # 深度相机信息话题名称
+points_topic: '/camera/depth/points'  # 点云数据的话题名称
+camera_trigger_topic: '/camera/trigger'  # 相机触发器数据话题名称
+events_topic: '/camera/events'  # 相机事件数据话题名称
+diagnostics_topic: '/camera/diagnostics'  # 相机诊断数据话题名称
+rgbd_sync: true  # 是否预先同步RGB和深度图像
+approx_rgbd_sync: true  # 是否使用近似同步RGB-D
+subscribe_rgbd: true  # 是否订阅已同步的RGB-D相关话题，例如使用rtabmap_sync/rgbd_sync节点
+rgbd_topic: 'rgbd_image'  # RGB-D话题名称
+depth_scale: 1.0  # 深度缩放比例
+compressed: false  # 是否订阅压缩图像话题
+rgb_image_transport: 'compressed'  # RGB图像的传输类型（例如：compressed, theora）
+depth_image_transport: 'compressedDepth'  # 深度图像的传输类型（例如：compressedDepth）
+subscribe_scan: false  # 是否订阅激光雷达扫描数据
+scan_topic: '/scan'  # 激光雷达扫描数据的话题名称
+subscribe_scan_cloud: false  # 是否订阅点云类型的扫描数据
+scan_cloud_topic: '/scan_cloud'  # 点云扫描数据的话题名称
+scan_normal_k: 0  # 扫描法线估计的最近邻点数量
+visual_odometry: true  # 是否启动RTAB-Map的视觉里程计节点
+icp_odometry: false  # 是否启动RTAB-Map的ICP（迭代最近点）里程计节点
+odom_topic: 'odom'  # 里程计话题名称
+vo_frame_id: 'odom'  # 视觉/ICP里程计的帧ID（TF）
+publish_tf_odom: true  # 是否发布里程计的TF变换
+odom_tf_angular_variance: 0.01  # 如果使用TF获取里程计数据，这是默认的角度方差
+odom_tf_linear_variance: 0.001  # 如果使用TF获取里程计数据，这是默认的线性方差
+odom_args: ''  # 里程计的更多参数（覆盖rtabmap_args中的相同参数）
+odom_sensor_sync: false  # 里程计传感器同步
+odom_guess_frame_id: ''  # 里程计猜测的帧ID
+odom_guess_min_translation: 0.0  # 最小平移变化，用于里程计猜测
+odom_guess_min_rotation: 0.0  # 最小旋转变化，用于里程计猜测
+imu_topic: '/imu/data'  # IMU话题名称，VIO方法和SLAM图优化（重力约束）使用
+wait_imu_to_init: false  # 等待IMU初始化
+subscribe_user_data: false  # 用户数据同步订阅
+user_data_topic: '/user_data'  # 用户数据话题名称
+user_data_async_topic: '/user_data_async'  # 用户数据异步订阅（速率应低于地图更新速率）
+gps_topic: '/gps/fix'  # GPS异步订阅话题，用于SLAM图优化和回环检测候选选择
+tag_topic: '/detections'  # AprilTag话题异步订阅，用于SLAM图优化和回环检测。标签位姿也将根据当前优化后的地图发布。
+tag_linear_variance: 0.0001  # 标签的线性方差
+tag_angular_variance: 9999.0  # 标签的角度方差，>=9999表示在优化中忽略旋转，当标签的旋转估计不可靠或未计算时
+fiducial_topic: '/fiducial_transforms'  # ArUco检测异步订阅话题，使用tag_linear_variance和tag_angular_variance设置协方差

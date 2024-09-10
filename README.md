@@ -60,6 +60,13 @@ colcon build
 source install/setup.sh
 ros2 launch agrobot_localization debug_localization_launch.py 
 
+# bringup - vslam
+colcon build
+source /usr/share/gazebo/setup.sh
+source install/setup.sh
+clear
+ros2 launch agrobot_bringup simulation_vslam_launch.py
+
 # 启动仿真gazebo
 colcon build
 source /usr/share/gazebo/setup.sh

@@ -40,6 +40,9 @@ amcl:
     scan_topic: scan  # 激光扫描话题名称，用于获取激光雷达数据
 
 bt_navigator:
+  # 功能: bt_navigator节点是导航的核心节点之一，它使用行为树（Behavior Tree）来管理导航的执行流程，包括路径规划、路径跟踪、避障和恢复行为等。
+  # 使用情况: 整个导航过程的决策控制中心，结合行为树管理所有的导航子任务。
+  # 可配置项: 支持自定义行为树（BT）的设计和配置，可以灵活定义不同的导航行为和恢复策略。
   ros__parameters:
     use_sim_time: True  # 是否使用仿真时间，用于在仿真环境下运行
     global_frame: map  # 全局坐标系名称，用于表示地图的坐标系
@@ -105,6 +108,9 @@ bt_navigator_navigate_to_pose_rclcpp_node:
     use_sim_time: True  # 是否使用仿真时间，用于在仿真环境下运行
 
 controller_server:
+  # 功能: controller_server节点负责路径跟踪和控制命令的生成。它接收局部路径规划器（如DWB或TEB）的输入，并根据机器人当前的位姿和环境生成速度指令，使机器人能够沿规划路径行驶。
+  # 使用情况: 主要用于路径跟踪阶段，通过调用局部路径规划算法来生成速度控制命令。
+  # 可配置项: 支持不同的局部规划器插件，如DWBLocalPlanner、TEBLocalPlanner等。
   ros__parameters:
     use_sim_time: True  # 是否使用仿真时间，用于在仿真环境下运行
     controller_frequency: 20.0  # 控制器运行频率（Hz），决定控制器更新的频率
@@ -262,6 +268,9 @@ map_saver:
     map_subscribe_transient_local: True  # 地图订阅暂态本地
 
 planner_server:
+  # 功能: planner_server节点负责全局路径规划。它使用全局路径规划算法（如A*算法、Dijkstra算法）根据地图和目标点生成从起点到目标点的路径。
+  # 使用情况: 当机器人接收到一个导航目标时，planner_server负责计算出一条可行的全局路径。
+  # 可配置项: 可以选择不同的全局规划器插件，如NavFn（基于Dijkstra）和SmacPlanner（基于A*）。
   ros__parameters:
     expected_planner_frequency: 20.0  # 规划器期望运行频率（Hz），决定路径规划的频率
     use_sim_time: True  # 是否使用仿真时间，用于在仿真环境下运行
@@ -273,6 +282,9 @@ planner_server:
       allow_unknown: true  # 是否允许规划未知区域
 
 smoother_server:
+  # 功能: smoother_server节点用于平滑处理路径。规划的路径有时可能包含急转弯或不平滑的路径段。smoother_server会平滑这些路径段，使得机器人在路径上行驶更加自然和稳定。
+  # 使用情况: 在路径规划之后和路径执行之前，确保路径的平滑性和可行性。
+  # 可配置项: 支持不同的路径平滑插件和算法，如贝塞尔曲线平滑、卡尔曼滤波器等。
   ros__parameters:
     use_sim_time: True  # 是否使用仿真时间，用于在仿真环境下运行
     smoother_plugins: ["simple_smoother"]  # 路径平滑插件列表，用于加载不同的路径平滑算法
@@ -283,6 +295,9 @@ smoother_server:
       do_refinement: True  # 是否进行细化，用于路径平滑
 
 behavior_server:
+  # 功能: behavior_server节点负责机器人行为的决策和状态管理。它使用行为树（Behavior Tree）来管理复杂的导航行为，如路径跟随、避障、恢复行为等。
+  # 使用情况: 在导航过程中，管理各种任务和状态转换，例如重新规划路径、恢复行为（绕开障碍物）等。
+  # 可配置项: 可以通过定义自定义的行为树（BT）来配置不同的导航策略和行为。
   ros__parameters:
     costmap_topic: local_costmap/costmap_raw  # 代价地图话题，用于获取代价地图数据
     footprint_topic: local_costmap/published_footprint  # 机器人足迹话题，用于获取机器人的足迹信息
@@ -312,6 +327,9 @@ robot_state_publisher:
     use_sim_time: True  # 是否使用仿真时间，用于在仿真环境下运行
 
 waypoint_follower:
+  # 功能: waypoint_follower节点负责按照给定的航路点（Waypoints）顺序引导机器人进行导航。它通常用于多点路径巡航任务。
+  # 使用情况: 用于复杂路径或多点巡航任务，引导机器人依次访问多个预设位置。
+  # 可配置项: 可以配置航路点序列、路径跟踪精度等参数。
   ros__parameters:
     use_sim_time: True  # 是否使用仿真时间，用于在仿真环境下运行
     loop_rate: 20  # 循环速率（Hz），决定路点跟随的更新频率
@@ -323,6 +341,9 @@ waypoint_follower:
       waypoint_pause_duration: 200  # 路点暂停持续时间（毫秒），控制等待时间
 
 velocity_smoother:
+  # 功能: velocity_smoother节点用于平滑速度命令，避免突然的速度变化导致机器人的不稳定。它在控制器生成速度命令后对其进行平滑处理。
+  # 使用情况: 速度命令生成后，以平滑方式控制机器人，避免震荡和过大的加速度。
+  # 可配置项: 可以调整加速度和减速度的平滑参数。
   ros__parameters:
     use_sim_time: True  # 是否使用仿真时间，用于在仿真环境下运行
     smoothing_frequency: 20.0  # 平滑频率（Hz），决定速度平滑的更新频率

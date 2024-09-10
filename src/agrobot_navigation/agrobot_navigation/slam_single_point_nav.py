@@ -22,9 +22,6 @@ class multi_point_navigator(BasicNavigator):
         super().__init__()
         self.waypoints = []
 
-        self.amcl_pose_group = MutuallyExclusiveCallbackGroup()
-
-        self.amcl_pose_sub = self.create_subscription(PoseWithCovarianceStamped, '/amcl_pose', self.amcl_pose_callback, 10,callback_group=self.amcl_pose_group)
         self.tf_buffer = Buffer()
         self.tf_listener = TransformListener(self.tf_buffer, self)
 
@@ -51,10 +48,6 @@ class multi_point_navigator(BasicNavigator):
         
         self.setInitialPose(goal_pose_0)
 
-    # AMCL位置回调函数
-    def amcl_pose_callback(self, msg:PoseWithCovarianceStamped):
-
-        self.get_logger().info(f'接收到AMCL位置{msg.pose.pose.position}')
 
     def execute_navigation(self):
         
@@ -74,34 +67,6 @@ class multi_point_navigator(BasicNavigator):
         goal_pose_1.pose.position.y = -1.437158465385437
         goal_pose_1.pose.orientation.z = -0.7065000323557776
         goal_pose_1.pose.orientation.w = 0.7077130098290444
-
-        goal_pose_2 = PoseStamped()
-        goal_pose_2.header.frame_id = 'map'
-        goal_pose_2.pose.position.x = 0.3460194766521454
-        goal_pose_2.pose.position.y = -3.924220561981201
-        goal_pose_2.pose.orientation.z = 0.9999008210228194
-        goal_pose_2.pose.orientation.w = 0.014083611677825186
-
-        goal_pose_3 = PoseStamped()
-        goal_pose_3.header.frame_id = 'map'
-        goal_pose_3.pose.position.x = -2.743558645248413
-        goal_pose_3.pose.position.y = -1.233283281326294
-        goal_pose_3.pose.orientation.z = 0.706965463245504
-        goal_pose_3.pose.orientation.w = 0.7072480708903135
-
-        goal_pose_4 = PoseStamped()
-        goal_pose_4.header.frame_id = 'map'
-        goal_pose_4.pose.position.x = -7.077213287353516
-        goal_pose_4.pose.position.y = -0.2623358368873596
-        goal_pose_4.pose.orientation.z = 0.9998667868598082
-        goal_pose_4.pose.orientation.w = 0.01632202605815453
-
-        goal_pose_5 = PoseStamped()
-        goal_pose_5.header.frame_id = 'map'
-        goal_pose_5.pose.position.x = 0.6587705016136169
-        goal_pose_5.pose.position.y = 1.0878171920776367
-        goal_pose_5.pose.orientation.z = -0.011559780021518187
-        goal_pose_5.pose.orientation.w = 0.9999331835107055
 
         self.goal_poses = [goal_pose_1]
         # self.goal_poses = [goal_pose_1,goal_pose_2,goal_pose_2,goal_pose_4,goal_pose_5]
